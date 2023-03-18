@@ -24,7 +24,7 @@ app.get("/set", (req, res) => {
   res.cookie("name", "tee", {
     sameSite: "none",
     secure: true,
-    httpOnly: true,
+    httpOnly: false,
     maxAge: 10000,
   });
   res.json({ message: "root" });
