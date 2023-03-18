@@ -26,7 +26,7 @@ app.get("/set", (req, res) => {
     sameSite: "none",
     secure: true,
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 10000,
   });
   res.json({ message: "root" });
 });
