@@ -22,12 +22,12 @@ app.use(
   session({
     name: "session",
     secret: "secret",
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
       sameSite: "none",
-      secure: true,
-      httpOnly: true,
+      secure: false,
+      httpOnly: false,
       maxAge: 60 * 60 * 1000,
     },
   })
