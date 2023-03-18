@@ -14,6 +14,8 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
 app.get("/", (req, res) => {
   res.json({ message: "root" });
 });
@@ -26,6 +28,11 @@ app.get("/set", (req, res) => {
     maxAge: 24 * 60 * 60 * 1000,
   });
   res.json({ message: "root" });
+});
+
+app.get("/get", (req, res) => {
+  const name = req.cookies.name;
+  res.json({ name: name });
 });
 
 app.listen(PORT, console.log("サーバーを開始します"));
