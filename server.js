@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.json({ message: "root" });
 });
 
-app.get("/set", (req, res) => {
+app.post("/set", (req, res) => {
   res.cookie("name", "tee", {
     sameSite: "none",
     secure: true,
@@ -30,7 +30,7 @@ app.get("/set", (req, res) => {
   res.json({ message: "root" });
 });
 
-app.get("/get", (req, res) => {
+app.post("/get", (req, res) => {
   const name = req.cookies.name;
   res.json({ name: name });
 });
