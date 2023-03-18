@@ -38,14 +38,15 @@ app.get("/", (req, res) => {
 
 // sessionのセット
 app.get("/set", (req, res) => {
-  req.session.age = "12";
+  const msg = "おはようございます";
+  req.session.message = msg;
   res.json({ message: "COOKIE SET SUCCESS" });
 });
 
 // sessionの取り出し
 app.get("/get", (req, res) => {
-  const age = req.session.age;
-  res.json({ age: age });
+  const message = req.session.message;
+  res.json({ message: message });
 });
 
 app.listen(PORT, console.log("サーバーを開始します"));
