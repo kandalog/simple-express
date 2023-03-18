@@ -3,7 +3,8 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 dotenv.config();
-import session from "express-session";
+// import session from "express-session";
+import cookieSession from "cookie-session";
 
 const app = express();
 app.enable("trust proxy");
@@ -20,11 +21,9 @@ app.use(
 app.use(cookieParser());
 
 app.use(
-  session({
+  cookieSession({
     name: "session",
     secret: "secret",
-    resave: true,
-    saveUninitialized: true,
     cookie: {
       sameSite: "none",
       secure: true,
