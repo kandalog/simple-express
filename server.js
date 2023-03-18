@@ -3,6 +3,7 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 dotenv.config();
+import session from "express-session";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,23 +17,35 @@ app.use(
 
 app.use(cookieParser());
 
+app.use(
+  session({
+    name: "session",
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+      secure: false,
+      httpOnly: true,
+      maxAge: 60 * 60 * 1000,
+    },
+  })
+);
+
 app.get("/", (req, res) => {
   res.json({ message: "root" });
 });
 
-app.post("/set", (req, res) => {
-  res.cookie("name", "tee", {
-    sameSite: "none",
-    secure: true,
-    httpOnly: false,
-    maxAge: 10000,
-  });
-  res.json({ message: "root" });
+// sessionのセット
+app.get("/set", (req, res) => {
+  req.session.age = "12";
+  res.json({ message: "COOKIE SET SUCCESS" });
 });
 
-app.post("/get", (req, res) => {
-  const name = req.cookies.name;
-  res.json({ name: name });
+// sessionの取り出し
+app.get("/get", (req, res) => {
+  const age = req.session.age;
+  res.json({ age: age });
 });
 
 app.listen(PORT, console.log("サーバーを開始します"));
