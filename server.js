@@ -12,6 +12,7 @@ app.use(
   cors({
     origin: "https://simple-react-12.onrender.com",
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
