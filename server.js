@@ -6,6 +6,7 @@ dotenv.config();
 import session from "express-session";
 
 const app = express();
+app.enable("trust proxy");
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(
@@ -26,7 +27,7 @@ app.use(
     saveUninitialized: true,
     cookie: {
       sameSite: "none",
-      secure: false,
+      secure: true,
       httpOnly: true,
       maxAge: 60 * 60 * 1000,
     },
